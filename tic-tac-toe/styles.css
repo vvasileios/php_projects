@@ -17,17 +17,16 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    width: 300px;
     margin-bottom: 1rem;
 }
 
 .cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100px;
     height: 100px;
-    background-color: #fff;
-    border-radius: 5px;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 0.5rem;
+    border: 1px solid #f0f0f0;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -43,15 +42,22 @@ body {
 }
 
 .action-btn {
+    width: 100px;
+    height: 50px;
+    font-size: medium;
     padding: 0.5rem 1rem;
     background-color: #333;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: .5rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .action-btn:hover {
     background-color: #555;
+}
+
+input:focus {
+    outline: none;
 }

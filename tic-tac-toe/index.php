@@ -1,3 +1,14 @@
+<?php
+$board = array_fill(0, 9, '');
+$boardLength = count($board);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo '<pre>';
+    var_dump($board);
+    echo '</pre>';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,17 +22,15 @@
 <body>
     <div class="container">
         <h1 class="title">Tic-Tac-Toe</h1>
-        <div class="board">
-            <div class="cell" id="0"></div>
-            <div class="cell" id="1"></div>
-            <div class="cell" id="2"></div>
-            <div class="cell" id="3"></div>
-            <div class="cell" id="4"></div>
-            <div class="cell" id="5"></div>
-            <div class="cell" id="6"></div>
-            <div class="cell" id="7"></div>
-            <div class="cell" id="8"></div>
-        </div>
+        <form action="index.php" method="post" class="board">
+            <?php for ($i = 0; $i < $boardLength; $i++) : ?>
+                <input
+                    type="text"
+                    name="board[<?php echo $i; ?>]"
+                    value="<?php echo $board[$i]; ?>"
+                    class="cell" />
+            <?php endfor; ?>
+        </form>
         <button class="action-btn">Start</button>
     </div>
 </body>
