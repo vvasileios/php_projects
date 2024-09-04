@@ -2,11 +2,6 @@
 $board = array_fill(0, 9, '');
 $boardLength = count($board);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo '<pre>';
-    var_dump($board);
-    echo '</pre>';
-}
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     type="text"
                     name="board[<?php echo $i; ?>]"
                     value="<?php echo $board[$i]; ?>"
-                    class="cell" />
+                    class="cell"
+                    readonly />
             <?php endfor; ?>
         </form>
         <button class="action-btn">Start</button>
