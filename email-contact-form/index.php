@@ -11,19 +11,23 @@
 <body>
     <div id="container">
         <form action="controller.php" method="post" id="form">
+            <div class="form-title">
+                <h2 class="title">Contact via Email</h2>
+            </div>
             <div class="name-container">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" autocomplete="off" required>
             </div>
             <div class="email-container">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="off" required>
             </div>
             <div class="message-container">
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows='15' required></textarea>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows='15' autocomplete="off" required></textarea>
             </div>
             <div class="button-container">
+                <input type="hidden" name="action" value="sendEmail">
                 <button type="reset">Reset</button>
                 <button type="submit" name="submit">Send Email</button>
             </div>

@@ -2,7 +2,7 @@ body {
     font-family: 'JetBrains Mono', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #0F162B;
 }
 
 #container {
@@ -20,13 +20,24 @@ body {
     justify-content: center;
     gap: 2rem;
     width: 25%;
-    height: 50%;
+    height: 55%;
     border: 1px solid #b5b5b5;
     padding: 2rem;
     border-radius: 5px;
-    background-color: white;
+    background-color: #0F162B;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: auto;
+}
+
+.form-title {
+    border-top: 1px solid #b5b5b5;
+    border-bottom: 1px solid #b5b5b5;
+    user-select: none;
+}
+
+.title {
+    padding-left: 1rem;
+    color: white;
 }
 
 .name-container {
@@ -54,12 +65,32 @@ body {
     gap: 1rem;
 }
 
+label {
+    font-weight: bold;
+    color: #8EA1BA;
+    user-select: none;
+}
+
 input[type="text"],
 input[type="email"],
 textarea {
+    font-family: 'JetBrains Mono', Arial, sans-serif;
     padding: 0.5rem;
     border: 1px solid #b5b5b5;
     border-radius: 5px;
+    background-color: #0F162B;
+    outline: none;
+    color: white;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    border: 1px solid white;
+}
+
+textarea {
+    resize: none;
 }
 
 button {
@@ -67,7 +98,23 @@ button {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
     color: white;
     cursor: pointer;
+    user-select: none;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+button[type="reset"] {
+    background-color: #dc3545;
+}
+
+button[type="reset"]:hover {
+    background-color: #bd2130;
 }
