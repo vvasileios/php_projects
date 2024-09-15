@@ -1,0 +1,73 @@
+body {
+    font-family: 'JetBrains Mono', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+#container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    width: 25%;
+    height: 50%;
+    border: 1px solid #b5b5b5;
+    padding: 2rem;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
+
+.name-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.email-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 0.5rem;
+    border: 1px solid #b5b5b5;
+    border-radius: 5px;
+}
+
+button {
+    font-family: 'JetBrains Mono', Arial, sans-serif;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
