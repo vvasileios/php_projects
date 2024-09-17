@@ -1,22 +1,19 @@
 <?php
 session_start();
 
-$errors = [];
+$errors = $_SESSION['errors'] ?? [];
+$success = $_SESSION['success'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['sender_email'] ?? '');
-    $email = trim($_POST['receiver_email'] ?? '');
+    $sender = trim($_POST['sender_email'] ?? '');
+    $receiver = trim($_POST['receiver_email'] ?? '');
     $subject = trim($_POST['subject'] ?? '');
     $message = trim($_POST['message'] ?? '');
 
-    if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+    if (empty($sender) || empty($receiver) || empty($subject) || empty($message)) {
         $errors[] = "All fields are required!";
     } else {
-        if (!stringValidation($name, 3, 50)) {
-            $errors[] = "Name must be between 3 and 50 characters!";
-        }
-
-        if (!emailValidation($email)) {
+        if (!emailValidation($sender) || !emailValidation($receiver)) {
             $errors[] = "Invalid email!";
         }
 
@@ -28,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Message must be between 10 and 1000 characters!";
         }
     }
+
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         header("Location: index.php");
@@ -35,6 +33,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Send email
+    $to = $receiver;
+    $subject = $subject;
+    $message = $message;
+    $headers = "From: $sender";
+
+    if (mail($to, $subject, $message, $headers)) {
+        $_SESSION['success'] = "Email sent successfully!";
+        header("Location: index.php");
+        exit();
+    } else {
+        $errors[] = "Failed to send email!";
+        $_SESSION['errors'] = $errors;
+        header("Location: index.php");
+        exit();
+    }
 }
 
 function stringValidation($value, $min = 1, $max = INF)

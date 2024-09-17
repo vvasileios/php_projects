@@ -2,6 +2,8 @@
 session_start();
 
 $errors = $_SESSION['errors'] ?? [];
+$success = $_SESSION['success'] ?? '';
+unset($_SESSION['success']);
 unset($_SESSION['errors']);
 ?>
 
@@ -25,6 +27,10 @@ unset($_SESSION['errors']);
                         <?php foreach ($errors as $error) : ?>
                             <p><?php echo htmlspecialchars($error); ?></p>
                         <?php endforeach; ?>
+                    </div>
+                <?php elseif (!empty($success)) : ?>
+                    <div class="success">
+                        <p><?php echo htmlspecialchars($success); ?></p>
                     </div>
                 <?php endif; ?>
             </div>
