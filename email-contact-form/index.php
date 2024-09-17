@@ -22,6 +22,10 @@
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" autocomplete="off" required>
             </div>
+            <div class="subject-container">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" autocomplete="off" required>
+            </div>
             <div class="message-container">
                 <label for="message">Message</label>
                 <textarea id="message" name="message" rows='15' autocomplete="off" required></textarea>

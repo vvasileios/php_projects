@@ -19,8 +19,8 @@ body {
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
-    width: 25%;
-    height: 55%;
+    width: 35%;
+    height: 65%;
     border: 1px solid #b5b5b5;
     padding: 2rem;
     border-radius: 5px;
@@ -47,6 +47,12 @@ body {
 }
 
 .email-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.subject-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
