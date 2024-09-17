@@ -36,7 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $to = $receiver;
     $subject = $subject;
     $message = $message;
-    $headers = "From: $sender";
+    $headers = "From: $sender\r\n";
+    $headers .= "Reply-To: $sender\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion();
 
     if (mail($to, $subject, $message, $headers)) {
         $_SESSION['success'] = "Email sent successfully!";
