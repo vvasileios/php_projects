@@ -3,8 +3,7 @@ session_start();
 
 $errors = $_SESSION['errors'] ?? [];
 $success = $_SESSION['success'] ?? '';
-unset($_SESSION['success']);
-unset($_SESSION['errors']);
+unset($_SESSION['success'], $_SESSION['errors']);
 ?>
 
 <!DOCTYPE html>

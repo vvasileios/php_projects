@@ -1,22 +1,44 @@
 <?php
 session_start();
 
-$errors = $_SESSION['errors'] ?? [];
-$success = $_SESSION['success'] ?? '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sender = trim($_POST['sender_email'] ?? '');
     $receiver = trim($_POST['receiver_email'] ?? '');
     $subject = trim($_POST['subject'] ?? '');
     $message = trim($_POST['message'] ?? '');
 
+    $errors = validateForm($sender, $receiver, $subject, $message);
+
+    if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
+        redirect('index.php');
+    }
+
+    if (sendEmail($sender, $receiver, $subject, $message)) {
+        $_SESSION['success'] = "Email sent successfully!";
+    } else {
+        $_SESSION['errors'] = ["Failed to send email!"];
+    }
+
+    redirect('index.php');
+}
+
+function validateForm($sender, $receiver, $subject, $message)
+{
+    $errors = [];
+
     if (empty($sender) || empty($receiver) || empty($subject) || empty($message)) {
         $errors[] = "All fields are required!";
     } else {
-        if (!emailValidation($sender) || !emailValidation($receiver)) {
-            $errors[] = "Invalid email!";
+        if (!emailValidation($sender)) {
+            $errors[] = "Invalid sender email!";
         }
 
+        if (!emailValidation($receiver)) {
+            $errors[] = "Invalid receiver email!";
+        }
+
+        // Validate subject and message length
         if (!stringValidation($subject, 3, 100)) {
             $errors[] = "Subject must be between 3 and 100 characters!";
         }
@@ -25,31 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Message must be between 10 and 1000 characters!";
         }
     }
+    return $errors;
+}
 
-    if (!empty($errors)) {
-        $_SESSION['errors'] = $errors;
-        header("Location: index.php");
-        exit();
-    }
-
-    // Send email
-    $to = $receiver;
-    $subject = $subject;
-    $message = $message;
+function sendEmail($sender, $receiver, $subject, $message)
+{
     $headers = "From: $sender\r\n";
     $headers .= "Reply-To: $sender\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion();
 
-    if (mail($to, $subject, $message, $headers)) {
-        $_SESSION['success'] = "Email sent successfully!";
-        header("Location: index.php");
-        exit();
-    } else {
-        $errors[] = "Failed to send email!";
-        $_SESSION['errors'] = $errors;
-        header("Location: index.php");
-        exit();
-    }
+    return mail($receiver, $subject, $message, $headers);
 }
 
 function stringValidation($value, $min = 1, $max = INF)
@@ -60,6 +67,12 @@ function stringValidation($value, $min = 1, $max = INF)
 function emailValidation($email)
 {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+function redirect($url)
+{
+    header("Location: $url");
+    exit();
 }
 
 function dd($data)
