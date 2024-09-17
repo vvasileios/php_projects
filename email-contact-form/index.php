@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+$errors = $_SESSION['errors'] ?? [];
+unset($_SESSION['errors']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,28 +17,34 @@
 
 <body>
     <div id="container">
-        <form action="controller.php" method="post" id="form">
+        <form action="controller.php" method="POST" id="form">
             <div class="form-title">
                 <h2 class="title">Contact via Email</h2>
+                <?php if (!empty($errors)) : ?>
+                    <div class="errors">
+                        <?php foreach ($errors as $error) : ?>
+                            <p><?php echo htmlspecialchars($error); ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
-            <div class="name-container">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" autocomplete="off" required>
+            <div class="sender-container">
+                <label for="sender-email">Sender</label>
+                <input type="email" id="sender-email" name="sender_email" autocomplete="off" placeholder="Provide your email address">
             </div>
-            <div class="email-container">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" autocomplete="off" required>
+            <div class="receiver-container">
+                <label for="receiver-email">Receiver</label>
+                <input type="email" id="receiver-email" name="receiver_email" autocomplete="off" placeholder="Provide the receivers email address">
             </div>
             <div class="subject-container">
                 <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" autocomplete="off" required>
+                <input type="text" id="subject" name="subject" autocomplete="off" placeholder="Subject of the email">
             </div>
             <div class="message-container">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" rows='15' autocomplete="off" required></textarea>
+                <textarea id="message" name="message" rows='15' autocomplete="off" placeholder="What you want to send?"></textarea>
             </div>
             <div class="button-container">
-                <input type="hidden" name="action" value="sendEmail">
                 <button type="reset">Reset</button>
                 <button type="submit" name="submit">Send Email</button>
             </div>
